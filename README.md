@@ -18,6 +18,13 @@
   <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=600&size=25&pause=1000&color=F08C00&center=true&vCenter=true&width=500&lines=MusicApp:+Kendi+Ritmini+Yakala;URL+ile+Müzik+Ekle;Kesintisiz+Müzik+Deneyimi;Web+Tasarımı+ve+Kodlama+Projesi" alt="Typing SVG" />
 </div>
 
+<br />
+<h2 align="center">🌟 Proje Genel Bakış</h2>
+<div align="center"> 
+  <img width="1910" height="1017" alt="image" src="https://github.com/user-attachments/assets/852f6246-5185-4d26-b4f3-0cc2fff8f55e" />
+ </div>
+<br />
+
 **Web Tasarımı ve Kodlama** dersi final projesi olarak geliştirilmiş; kullanıcıların kesintisiz müzik dinleyebileceği, dinamik listeler oluşturabileceği ve AJAX altyapısı sayesinde sayfa yenilenmeden etkileşime girebileceği modern bir web uygulamasıdır.
 
 ## 📸 Proje Galerisi
