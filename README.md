@@ -128,7 +128,7 @@ Music/
 <br />
 
 <div align="center">
-  <img src="https://skillicons.dev/icons?i=cs,dotnet,html,css,js,bootstrap,jquery,vscode,github&perline=9" />
+  <img src="https://skillicons.dev/icons?i=cs,dotnet,html,css,js,bootstrap,jquery,github&perline=9" />
 </div>
 <br>
  
