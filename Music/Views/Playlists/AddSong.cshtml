@@ -1,0 +1,75 @@
+﻿@model List<Music.Models.Song>
+
+@{
+    ViewData["Title"] = "Şarkı Seç";
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+
+            <div class="card shadow-sm border-0 rounded-4 mb-4 bg-primary text-white">
+                <div class="card-body p-4 text-center">
+                    <h2 class="fw-bold mb-0">🎵 Şarkı Seç</h2>
+                    <p class="mb-0 mt-2 text-white-50">
+                        '@ViewBag.PlaylistName' listesine eklemek istediğin şarkıyı seç.
+                    </p>
+                </div>
+            </div>
+
+            <div class="card shadow border-0 rounded-4">
+                <div class="list-group list-group-flush rounded-4">
+                    @if (!Model.Any())
+                    {
+                        <div class="text-center p-5">
+                            <h5 class="text-muted">Sistemde hiç şarkı yok.</h5>
+                            <a href="/Songs/Upload" class="btn btn-outline-primary mt-3">Şarkı Yükle</a>
+                        </div>
+                    }
+                    else
+                    {
+                        @foreach (var song in Model)
+                        {
+                            <div class="list-group-item p-3 d-flex align-items-center justify-content-between hover-effect">
+
+                                <div class="d-flex align-items-center gap-3">
+                                    <div class="bg-light rounded-circle d-flex align-items-center justify-content-center text-primary fw-bold"
+                                         style="width: 45px; height: 45px; font-size: 1.2rem;">
+                                        ♪
+                                    </div>
+                                    <div>
+                                        <h6 class="mb-0 fw-bold text-dark">@song.Title</h6>
+                                        <small class="text-muted">@song.Artist</small>
+                                    </div>
+                                </div>
+
+                                <form asp-action="AddSongToPlaylist" method="post" class="m-0">
+                                    <input type="hidden" name="playlistId" value="@ViewBag.PlaylistId" />
+                                    <input type="hidden" name="songId" value="@song.Id" />
+
+                                    <button type="submit" class="btn btn-success rounded-pill px-4 btn-sm fw-bold">
+                                        Ekle ➕
+                                    </button>
+                                </form>
+
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+
+            <div class="text-center mt-4">
+                <a asp-action="Details" asp-route-id="@ViewBag.PlaylistId" class="text-decoration-none text-secondary fw-bold">
+                    ← Listeye Geri Dön
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<style>
+    .hover-effect:hover {
+        background-color: #f8f9fa;
+    }
+</style>

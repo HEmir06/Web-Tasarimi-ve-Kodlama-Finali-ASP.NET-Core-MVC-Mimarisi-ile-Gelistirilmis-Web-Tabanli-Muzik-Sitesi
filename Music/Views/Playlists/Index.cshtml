@@ -1,0 +1,119 @@
+﻿@model IEnumerable<Music.Models.Playlist>
+
+@{
+    ViewData["Title"] = "Listelerim";
+}
+
+<div class="container mt-4">
+
+    <div class="d-flex align-items-center justify-content-between mb-4 animate__animated animate__fadeInDown">
+        <h2 class="fw-bold gradient-text m-0">📂 Çalma Listelerim</h2>
+        <a asp-action="Create" class="btn btn-warning text-dark rounded-pill fw-bold shadow-sm">
+            <i class="bi bi-plus-lg"></i> Yeni Liste Oluştur
+        </a>
+    </div>
+
+    @if (Model == null || !Model.Any())
+    {
+        <div class="alert alert-light text-center border-0 shadow-sm rounded-4 p-5 animate__animated animate__fadeIn">
+            <div style="font-size: 5rem;" class="mb-3">🎧</div>
+            <h4>Henüz Hiç Listen Yok</h4>
+            <p class="text-muted">Kendi müzik arşivini oluşturmaya başla!</p>
+            <a asp-action="Create" class="btn btn-warning text-dark rounded-pill px-5 fw-bold mt-2 shadow-sm">
+                İlk Listeni Oluştur
+            </a>
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card card-3d-effect shadow-sm h-100 border-0 rounded-4" style="background-color: #fff;">
+
+                        <div class="position-relative">
+                            <a asp-action="Details" asp-route-id="@item.Id" style="text-decoration: none;">
+                                @{
+                                    string imageUrl = "";
+                                   
+                                    if (item.Songs != null && item.Songs.Any())
+                                    {
+                                        var firstSong = item.Songs.FirstOrDefault();
+                                        if (firstSong != null) { imageUrl = firstSong.ImageUrl; }
+                                    }
+                                }
+
+                                @if (!string.IsNullOrEmpty(imageUrl))
+                                {
+                                    <img src="@imageUrl" class="w-100" style="height: 200px; object-fit: cover; opacity: 0.9; transition: 0.3s;">
+                                }
+                                else
+                                {
+                                    <div class="d-flex align-items-center justify-content-center"
+                                         style="height: 200px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                                        <i class="bi bi-music-note-list text-white" style="font-size: 4rem; opacity: 0.2;"></i>
+                                    </div>
+                                }
+                            </a>
+                        </div>
+
+                        <div class="card-body text-center pt-4">
+                            <h5 class="fw-bold text-dark text-truncate">@item.Name</h5>
+
+                            <p class="text-muted small">
+                                @(item.Songs != null ? item.Songs.Count : 0) Şarkı
+                            </p>
+
+                            <div class="d-flex justify-content-center gap-2 mt-3">
+                                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-dark btn-sm rounded-pill px-3 fw-bold transition-btn">
+                                    İncele
+                                </a>
+
+                                <form asp-action="DeleteConfirmed" asp-route-id="@item.Id" method="post" id="deleteForm-@item.Id">
+                                    <button type="button" onclick="confirmDeletePlaylist(@item.Id)" class="btn btn-outline-danger btn-sm rounded-pill px-3 fw-bold transition-btn">
+                                        Sil
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>
+
+<style>
+    .transition-btn:hover {
+        transform: scale(1.05);
+        transition: 0.3s;
+    }
+
+    [data-theme="dark"] .card {
+        background-color: #fff !important;
+    }
+
+    [data-theme="dark"] .text-dark {
+        color: #000 !important;
+    }
+</style>
+
+<script>
+    function confirmDeletePlaylist(id) {
+        Swal.fire({
+            title: 'Listeyi Sil?',
+            text: "Bu işlem geri alınamaz! İçindeki şarkılar listeden çıkarılacak.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Evet, Sil!',
+            cancelButtonText: 'Vazgeç'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('deleteForm-' + id).submit();
+            }
+        })
+    }
+</script>

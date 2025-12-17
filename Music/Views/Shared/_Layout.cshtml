@@ -1,0 +1,543 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - MusicApp</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+    <style>
+        /* 1. RENK TANIMLAMALARI */
+        :root {
+            /* AYDINLIK MOD */
+            --bg-color: #fffbe6;
+            --text-color: #2c2c2c;
+            --card-bg: #ffffff;
+            --navbar-bg: #ffffff;
+            --nav-link-color: #555;
+            --icon-color: #f08c00;
+            --scrollbar-thumb: #f08c00;
+            --scrollbar-track: #fffbe6;
+        }
+
+        [data-theme="dark"] {
+            /* KARANLIK MOD */
+            --bg-color: #121212;
+            --text-color: #f1f1f1;
+            --card-bg: #ffffff;
+            --navbar-bg: #181818;
+            --nav-link-color: #ffffff;
+            --icon-color: #ffee00;
+            --scrollbar-thumb: #ffee00;
+            --scrollbar-track: #121212;
+        }
+
+        /* 2. GENEL AYARLAR */
+        body {
+            background-color: var(--bg-color) !important;
+            color: var(--text-color) !important;
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            padding-bottom: 120px; /* Player için yer */
+            transition: background-color 0.3s, color 0.3s;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* NAVBAR */
+        .navbar {
+            background-color: var(--navbar-bg) !important;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: background-color 0.3s;
+        }
+
+        .navbar-nav .nav-link {
+            color: var(--nav-link-color) !important;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+            .navbar-nav .nav-link:hover {
+                color: #f08c00 !important;
+            }
+
+        [data-theme="dark"] .navbar-nav .nav-link:hover {
+            color: #ffee00 !important;
+        }
+        /* PROFESYONEL MÜZİK EKLE BUTONU */
+        .btn-music-add {
+            background: linear-gradient(135deg, #f08c00 0%, #ff0080 100%); /* Turuncu-Pembe Geçiş */
+            color: white !important;
+            border-radius: 50px; /* Hap şeklinde yuvarlatma */
+            padding: 8px 25px; /* İç boşluk */
+            font-weight: 600;
+            font-size: 0.9rem;
+            border: none;
+            box-shadow: 0 4px 15px rgba(240, 140, 0, 0.3); /* Hafif turuncu gölge */
+            transition: all 0.3s ease; /* Yumuşak geçiş animasyonu */
+            display: flex;
+            align-items: center;
+            gap: 8px; /* İkon ile yazı arası boşluk */
+            text-transform: uppercase; /* Yazıyı büyük harf yapar  */
+            letter-spacing: 0.5px;
+        }
+
+            .btn-music-add:hover {
+                transform: translateY(-3px); /* Yukarı doğru hafif kalkma */
+                box-shadow: 0 8px 25px rgba(255, 0, 128, 0.4); /* Gölgeyi belirginleştir */
+                color: white !important;
+                background: linear-gradient(135deg, #ff0080 0%, #f08c00 100%); /* Renklerin yerini değiştir */
+            }
+
+            .btn-music-add i {
+                font-size: 1.1rem;
+            }
+
+        /* RGB YAZI */
+        .gradient-text {
+            background: linear-gradient(to right, #f08c00 0%, #ff0080 25%, #7928ca 50%, #ff0080 75%, #f08c00 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent !important;
+            animation: shine 5s linear infinite;
+            font-weight: 800 !important;
+        }
+
+        [data-theme="dark"] .gradient-text {
+            background: linear-gradient(to right, #ffee00 0%, #00ffff 25%, #ff00cc 50%, #00ffff 75%, #ffee00 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        @@keyframes shine {
+            to {
+                background-position: 200% center;
+            }
+        }
+
+        /* YAPIŞKAN PLAYER  */
+        #sticky-player {
+         
+            z-index: 9999;
+            transition: all 0.3s ease;
+        }
+
+        .player-img {
+            width: 55px;
+            height: 55px;
+            border-radius: 12px;
+            object-fit: cover;
+            margin-right: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        /* EKOLAYZER */
+        .equalizer {
+            display: flex;
+            align-items: flex-end;
+            height: 20px;
+            width: 20px;
+            margin-right: 10px;
+            gap: 2px;
+        }
+
+        .bar {
+            width: 4px;
+            background-color: #f08c00;
+            animation: equalize 1s infinite alternate;
+        }
+
+            .bar:nth-child(1) {
+                animation-delay: 0.1s;
+                height: 10px;
+            }
+
+            .bar:nth-child(2) {
+                animation-delay: 0.3s;
+                height: 15px;
+            }
+
+            .bar:nth-child(3) {
+                animation-delay: 0.5s;
+                height: 8px;
+            }
+
+        [data-theme="dark"] .bar {
+            background-color: #ffee00;
+        }
+
+        @@keyframes equalize {
+            0% {
+                height: 5px;
+            }
+
+            100% {
+                height: 20px;
+            }
+        }
+
+        /* ARAMA KUTUSU */
+        .search-input {
+            background-color: #ffffff !important;
+            border: 2px solid #e0e0e0;
+            color: #000000 !important;
+            font-weight: 500;
+        }
+
+            .search-input:focus {
+                border-color: #f08c00;
+                box-shadow: 0 0 10px rgba(240, 140, 0, 0.2);
+            }
+
+        /* ARKA PLAN LOGO ANİMASYONU */
+        @@keyframes rainbow-bg {
+            0% {
+                color: #f08c00
+            }
+
+            50% {
+                color: #ff0080
+            }
+
+            100% {
+                color: #f08c00
+            }
+        }
+
+        @@keyframes rainbow-bg-dark {
+            0% {
+                color: #ffee00
+            }
+
+            50% {
+                color: #00ffff
+            }
+
+            100% {
+                color: #ffee00
+            }
+        }
+
+        body::before {
+            content: "♫";
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            font-size: 30rem;
+            opacity: 0.08;
+            z-index: -1;
+            pointer-events: none;
+            animation: rainbow-bg 20s linear infinite;
+            color: #f08c00;
+        }
+
+        [data-theme="dark"] body::before {
+            animation: rainbow-bg-dark 10s linear infinite;
+            opacity: 0.4;
+        }
+
+        /* 3D TILT VE KARTLAR */
+        .card {
+            background-color: var(--card-bg) !important;
+            color: #000 !important;
+            transform-style: preserve-3d;
+            transform: perspective(1000px);
+        }
+
+        .card-body, .card-header, .btn {
+            transform: translateZ(20px);
+            position: relative;
+            z-index: 10;
+        }
+
+        /* SCROLLBAR */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--scrollbar-track);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: var(--scrollbar-thumb);
+            border-radius: 20px;
+        }
+    </style>
+    <link rel="icon" type="image/x-icon" href="~/headphones.png">
+</head>
+<body>
+
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-light border-bottom mb-3">
+            <div class="container">
+                <a class="navbar-brand fs-3 d-flex align-items-center" asp-controller="Home" asp-action="Index">
+                    <div class="equalizer">
+                        <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+                    </div>
+                    <span class="gradient-text">MusicApp</span>
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between align-items-center">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Home" asp-action="Index">Ana Sayfa</a>
+                        </li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Playlists" asp-action="Index">Listelerim</a>
+                            </li>
+                        }
+                    </ul>
+
+                    <form class="d-flex mx-auto align-items-center gap-2" asp-controller="Home" asp-action="Index" method="get" style="width: 40%;">
+                        <input class="form-control rounded-pill border-0 shadow-sm search-input" type="search" name="searchString"
+                               placeholder="Şarkı ara..." value="@ViewData["CurrentFilter"]" style="height: 45px;">
+                        <button class="btn btn-warning text-white rounded-circle shadow-sm" type="submit" style="width: 45px; height: 45px;">
+                            <i class="bi bi-search"></i>
+                        </button>
+                    </form>
+
+                    <ul class="navbar-nav align-items-center gap-2">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item d-flex align-items-center">
+                                <img src="https://ui-avatars.com/api/?name=@User.Identity.Name&background=random&color=fff&bold=true"
+                                     class="rounded-circle border border-2 border-white shadow-sm" width="35" height="35">
+                                <span class="ms-2 small fw-bold">@User.Identity.Name</span>
+                            </li>
+                            <li class="nav-item ms-3 d-flex align-items-center">
+                                <a class="nav-link btn-music-add" asp-controller="Home" asp-action="AddSong">
+                                    <i class="bi bi-cloud-plus-fill"></i>
+                                    <span>Müzik Ekle</span>
+                                </a>
+                            </li>
+                          
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="btn btn-warning btn-sm rounded-pill px-4 text-dark fw-bold" asp-controller="Account" asp-action="Login">Giriş</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="btn btn-sm rounded-pill px-4 fw-bold btn-register-dynamic" asp-controller="Account" asp-action="Register">Kaydol</a>
+                            </li>
+                        }
+                        <li class="nav-item ms-2 border-start ps-3">
+                            <button id="theme-toggle" class="btn btn-light rounded-circle shadow-sm"><i class="bi bi-moon-fill"></i></button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <main role="main" class="pb-3 animate__animated animate__fadeInUp">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted mt-5">
+        <div class="container text-center">
+            &copy; 2025 - MusicApp - <a asp-area="" asp-controller="Home" asp-action="Privacy">Gizlilik</a>
+        </div>
+    </footer>
+
+    <div id="sticky-player" class="d-none position-fixed bottom-0 start-0 w-100 bg-dark text-white shadow-lg border-top border-secondary" style="z-index: 9999;">
+
+        <div class="progress" style="height: 5px; border-radius: 0; background-color: #222;">
+            <div class="progress-bar bg-warning" role="progressbar" style="width: 0%; transition: width 0.1s linear;" id="player-progress-bar"></div>
+        </div>
+
+        <div class="container d-flex align-items-center justify-content-between py-2">
+
+            <div class="d-flex align-items-center" style="width: 30%;">
+                <img id="player-img" src="https://via.placeholder.com/60" class="rounded shadow-sm me-3" width="55" height="55" style="object-fit: cover;">
+                <div class="text-truncate">
+                    <h6 id="player-title" class="mb-0 fw-bold text-white small">Şarkı Seçilmedi</h6>
+                    <small id="player-artist" class="text-white-50">Sanatçı</small>
+                </div>
+            </div>
+
+            <div class="d-flex align-items-center justify-content-center gap-4" style="width: 40%;">
+                <button class="btn btn-link text-secondary p-0" onclick="window.seekMusic(-5)" title="5sn Geri">
+                    <i class="bi bi-rewind-fill fs-4"></i>
+                </button>
+
+                <button class="btn btn-warning rounded-circle shadow d-flex align-items-center justify-content-center"
+                        onclick="window.togglePlay()" style="width: 50px; height: 50px;">
+                    <i id="player-play-btn-icon" class="bi bi-play-fill fs-2 text-dark"></i>
+                </button>
+
+                <button class="btn btn-link text-secondary p-0" onclick="window.seekMusic(5)" title="5sn İleri">
+                    <i class="bi bi-fast-forward-fill fs-4"></i>
+                </button>
+            </div>
+
+            <div class="d-flex align-items-center justify-content-end gap-3" style="width: 30%;">
+                <button class="btn btn-link text-secondary p-0" onclick="window.toggleMute()" title="Sessize Al">
+                    <i id="mute-icon" class="bi bi-volume-up-fill fs-5"></i>
+                </button>
+
+                <button class="btn btn-sm btn-outline-secondary rounded-circle" onclick="window.closePlayer()" style="width: 30px; height: 30px; padding: 0;">
+                    <i class="bi bi-x"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        // Global Player Nesnesi
+        window.currentAudio = new Audio();
+
+        // --- TEMA VE DİĞER AYARLAR ---
+        const toggleButton = document.getElementById('theme-toggle');
+        const html = document.documentElement;
+        if (localStorage.getItem('theme') === 'dark') html.setAttribute('data-theme', 'dark');
+
+        if(toggleButton) {
+            toggleButton.addEventListener('click', () => {
+                if (html.getAttribute('data-theme') === 'dark') {
+                    html.removeAttribute('data-theme'); localStorage.setItem('theme', 'light');
+                } else {
+                    html.setAttribute('data-theme', 'dark'); localStorage.setItem('theme', 'dark');
+                }
+            });
+        }
+
+        VanillaTilt.init(document.querySelectorAll(".card-3d-effect"), { max: 10, speed: 400, glare: false });
+
+        function confirmLogout() {
+            Swal.fire({
+                title: 'Çıkış Yapılıyor?',
+                text: "Hesabından çıkmak istediğine emin misin?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#f08c00',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Evet, Çıkış Yap!',
+                cancelButtonText: 'İptal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('logoutForm').submit();
+                }
+            })
+        }
+
+        // --- 1. MÜZİĞİ BAŞLAT ---
+        window.playGlobalMusic = function(url, title, artist, img, id) {
+            if (!url) { console.error("URL Bulunamadı"); return; }
+
+            // URL Düzeltme
+            if (!url.startsWith("http") && !url.startsWith("/")) { url = "/" + url; }
+
+            console.log("Çalınıyor: " + url);
+
+            // Arayüz Bilgilerini Güncelle
+            document.getElementById("player-title").innerText = title;
+            document.getElementById("player-artist").innerText = artist;
+            document.getElementById("player-img").src = img ? img : "https://via.placeholder.com/60";
+
+            // Player'ı Görünür Yap
+            var stickyPlayer = document.getElementById("sticky-player");
+            if(stickyPlayer) {
+                stickyPlayer.classList.remove("d-none");
+                stickyPlayer.style.display = "block";
+            }
+
+            // Sesi Yükle ve Çal
+            try {
+                window.currentAudio.src = url;
+                window.currentAudio.load();
+                var playPromise = window.currentAudio.play();
+
+                if (playPromise !== undefined) {
+                    playPromise.then(_ => window.updatePlayIcon(true))
+                               .catch(err => console.error("Oynatma Hatası:", err));
+                }
+            } catch (e) { console.error(e); }
+        };
+
+        // --- 2. OYNAT / DURDUR ---
+        window.togglePlay = function() {
+            if (window.currentAudio.paused) {
+                window.currentAudio.play();
+                window.updatePlayIcon(true);
+            } else {
+                window.currentAudio.pause();
+                window.updatePlayIcon(false);
+            }
+        };
+
+        // --- 3. İKON GÜNCELLE ---
+        window.updatePlayIcon = function(isPlaying) {
+            var icon = document.getElementById("player-play-btn-icon");
+            if(icon) {
+                icon.className = isPlaying ? "bi bi-pause-fill fs-2 text-dark" : "bi bi-play-fill fs-2 text-dark";
+            }
+        };
+
+        // --- 4. İLERİ / GERİ SAR ---
+        window.seekMusic = function(seconds) {
+            if(window.currentAudio) window.currentAudio.currentTime += seconds;
+        };
+
+        // --- 5. SESSİZE AL ---
+        window.toggleMute = function() {
+            window.currentAudio.muted = !window.currentAudio.muted;
+            var icon = document.getElementById("mute-icon");
+            if(icon) {
+                icon.className = window.currentAudio.muted ? "bi bi-volume-mute-fill fs-5 text-danger" : "bi bi-volume-up-fill fs-5";
+            }
+        };
+
+        // --- 6. KAPAT ---
+        window.closePlayer = function() {
+            window.currentAudio.pause();
+            document.getElementById("sticky-player").classList.add("d-none");
+        };
+
+        // --- 7. İLERLEME ÇUBUĞU ---
+        window.currentAudio.ontimeupdate = function() {
+            var bar = document.getElementById("player-progress-bar");
+            if(bar && window.currentAudio.duration) {
+                var percent = (window.currentAudio.currentTime / window.currentAudio.duration) * 100;
+                bar.style.width = percent + "%";
+            }
+        };
+
+        // --- 8. KLAVYE KISAYOLLARI ---
+        document.addEventListener('keydown', function(event) {
+            if(event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA') return;
+
+            if (event.code === 'Space') { event.preventDefault(); window.togglePlay(); }
+            else if (event.code === 'ArrowRight') { window.seekMusic(5); }
+            else if (event.code === 'ArrowLeft') { window.seekMusic(-5); }
+            else if (event.code === 'KeyM') { window.toggleMute(); }
+        });
+    </script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

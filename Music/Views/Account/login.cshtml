@@ -1,0 +1,33 @@
+﻿@{
+    ViewData["Title"] = "Giriş Yap";
+}
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <h3 class="text-center">🔑 Giriş Yap</h3>
+            <hr />
+
+            <div class="text-danger" asp-validation-summary="All"></div>
+
+            <form method="post" asp-action="Login">
+                <div class="mb-3">
+                    <label>Email Adresi</label>
+                    <input type="email" name="email" class="form-control" required />
+                </div>
+                <div class="mb-3">
+                    <label>Şifre</label>
+                    <input type="password" name="password" class="form-control" required />
+                </div>
+
+                <div class="mb-3">
+                    <div class="g-recaptcha" data-sitekey="6LdTHyEsAAAAAA2vY26WU184pOVEV6P2Hj_O2fi3"></div>
+                </div>
+
+                <button type="submit" class="btn btn-success w-100">Giriş Yap</button>
+            </form>
+            <p class="mt-3 text-center">Hesabın yok mu? <a href="/Account/Register">Kayıt Ol</a></p>
+        </div>
+    </div>
+</div>

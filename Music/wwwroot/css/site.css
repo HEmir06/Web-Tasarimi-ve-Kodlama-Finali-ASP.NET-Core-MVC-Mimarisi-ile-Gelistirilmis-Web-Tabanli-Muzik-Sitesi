@@ -1,0 +1,67 @@
+/* 1. GENEL AYARLAR */
+body {
+    font-family: 'Poppins', sans-serif !important; /* Yeni Font */
+    background-color: #fffbe6; /* Senin Krem Rengin */
+    color: #2d3436;
+}
+
+/* 2. KART TASARIMI VE HOVER EFEKTÝ */
+.card {
+    border: none;
+    border-radius: 20px !important;
+    background: #ffffff;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05); /* Yumuþak gölge */
+    transition: all 0.3s ease; /* Pürüzsüz geçiþ */
+}
+
+    .card:hover {
+        transform: translateY(-10px); /* Yukarý kalkýþ */
+        box-shadow: 0 20px 40px rgba(240, 140, 0, 0.2); /* Sarýmsý gölge */
+    }
+
+/* Kart içindeki resimlerin köþeleri */
+.card-img-top, .card-header img {
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+/* 3. MODERN BUTONLAR */
+.btn {
+    border-radius: 50px !important; /* Tam yuvarlak */
+    padding: 10px 25px;
+    font-weight: 600;
+    transition: transform 0.2s;
+}
+
+    .btn:active {
+        transform: scale(0.95); /* Týklayýnca küçülme hissi */
+    }
+
+.btn-primary {
+    background: linear-gradient(45deg, #f08c00, #ffb900); /* Gradyan Renk */
+    border: none;
+}
+
+/* 4. NAVBAR (BUZLU CAM EFEKTÝ) */
+.navbar {
+    background: rgba(255, 255, 255, 0.85) !important; /* Yarý þeffaf */
+    backdrop-filter: blur(10px); /* Buzlama efekti */
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+/* 5. GÝRÝÞ KUTULARI (INPUT) */
+.form-control {
+    border-radius: 15px;
+    border: 2px solid #eee;
+    padding: 12px;
+    background-color: #f9f9f9;
+}
+
+    .form-control:focus {
+        background-color: #fff;
+        border-color: #f08c00; /* Odaklanýnca turuncu çizgi */
+        box-shadow: 0 0 0 4px rgba(240, 140, 0, 0.1);
+    }

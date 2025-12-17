@@ -1,0 +1,35 @@
+﻿@{
+    ViewData["Title"] = "Kayıt Ol";
+}
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <h3>🚀 Kayıt Ol</h3>
+
+            <div class="text-danger" asp-validation-summary="All"></div>
+
+            <form method="post" asp-action="Register">
+                <div class="mb-3">
+                    <label>Email</label>
+                    <input type="email" name="email" class="form-control" required />
+                </div>
+
+                <div class="mb-3">
+                    <label>Şifre</label>
+                    <input type="password" name="password" class="form-control" required />
+                </div>
+
+                <div class="mb-3">
+                    <label>Yaş</label>
+                    <input type="number" name="age" class="form-control" required min="16" max="100" />
+                </div>
+
+                <div class="g-recaptcha mb-3" data-sitekey="6LdTHyEsAAAAAA2vY26WU184pOVEV6P2Hj_O2fi3"></div>
+
+                <button type="submit" class="btn btn-primary w-100">Kayıt Ol</button>
+            </form>
+        </div>
+    </div>
+</div>

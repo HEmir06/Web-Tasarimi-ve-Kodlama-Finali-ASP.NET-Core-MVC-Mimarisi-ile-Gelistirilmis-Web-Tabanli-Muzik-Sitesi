@@ -1,0 +1,53 @@
+﻿@model Music.Models.Song
+
+@{
+    ViewData["Title"] = "Müzik Ekle";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow border-0">
+                <div class="card-header bg-warning text-dark fw-bold">
+                    <i class="bi bi-music-note-list"></i> Yeni Şarkı Ekle
+                </div>
+                <div class="card-body p-4">
+                    <form asp-action="AddSong" method="post">
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Şarkı Adı</label>
+                            <input asp-for="Title" class="form-control" required placeholder="Örn: Rüzgar" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Sanatçı</label>
+                            <input asp-for="Artist" class="form-control" required placeholder="Sanatçı Adı" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold text-danger">🎵 Müzik Linki (AudioUrl)</label>
+                            <input asp-for="AudioUrl" class="form-control" required placeholder="https://site.com/sarki.mp3" />
+                            <div class="form-text small">
+                                İnternetten <code>.mp3</code> linki veya projedeki <code>/musics/sarki.mp3</code> yolunu yazabilirsin.
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Kapak Resmi Linki</label>
+                            <input asp-for="ImageUrl" class="form-control" placeholder="https://site.com/resim.jpg" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Albüm Adı</label>
+                            <input asp-for="Album" class="form-control" placeholder="Boş bırakırsan 'Single' olur" />
+                        </div>
+
+                        <button type="submit" class="btn btn-dark w-100 py-2 fw-bold">
+                            Listeye Ekle 🚀
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

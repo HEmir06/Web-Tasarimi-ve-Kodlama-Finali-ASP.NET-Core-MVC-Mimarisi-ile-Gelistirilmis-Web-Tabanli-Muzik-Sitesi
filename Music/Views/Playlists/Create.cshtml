@@ -1,0 +1,45 @@
+﻿@model Music.Models.Playlist
+
+@{
+    ViewData["Title"] = "Yeni Liste Oluştur";
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+
+            <div class="card shadow-lg border-0 rounded-4">
+                <div class="card-header bg-primary text-white text-center py-4 rounded-top-4">
+                    <h3 class="mb-0 fw-bold">📝 Yeni Liste</h3>
+                    <small class="text-white-50">Önce listeni oluştur, sonra içine şarkı atacaksın.</small>
+                </div>
+
+                <div class="card-body p-4 p-md-5">
+                    <form asp-action="Create" method="post">
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+                        <div class="mb-4">
+                            <label asp-for="Name" class="form-label fw-bold text-secondary">Playlist Adı</label>
+                            <input asp-for="Name" class="form-control form-control-lg bg-light border-0" placeholder="Örn: Yol Şarkıları 🚗" required />
+                            <span asp-validation-for="Name" class="text-danger small"></span>
+                        </div>
+
+                        <div class="d-grid gap-3">
+                            <button type="submit" class="btn btn-primary btn-lg rounded-pill shadow-sm fw-bold">
+                                Oluştur
+                            </button>
+                            <a asp-action="Index" class="btn btn-outline-secondary rounded-pill border-0">Vazgeç</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

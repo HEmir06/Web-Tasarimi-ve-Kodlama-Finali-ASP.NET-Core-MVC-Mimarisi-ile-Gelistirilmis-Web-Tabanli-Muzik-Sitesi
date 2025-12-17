@@ -1,0 +1,63 @@
+﻿@model Music.Models.Song
+
+@{
+    ViewData["Title"] = "Manuel Şarkı Ekle";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow border-0 rounded-4">
+                <div class="card-header bg-primary text-white text-center py-3 rounded-top-4">
+                    <h4 class="mb-0 fw-bold">Manuel Şarkı Ekle</h4>
+                    <small>AudioUrl ve ImageUrl Kullanarak</small>
+                </div>
+                <div class="card-body p-4">
+                    <form asp-controller="Songs" asp-action="Create" method="post">
+
+                        <div class="mb-3">
+                            <label class="fw-bold">Şarkı Adı</label>
+                            <input asp-for="Title" class="form-control" placeholder="Örn: Tarkan - Yolla" required />
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="fw-bold">Sanatçı</label>
+                            <input asp-for="Artist" class="form-control" placeholder="Örn: Tarkan" required />
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="fw-bold">Albüm</label>
+                            <input asp-for="Album" class="form-control" />
+                        </div>
+
+                        <hr />
+
+                        <div class="mb-3">
+                            <label class="fw-bold text-success">Müzik Linki (AudioUrl)</label>
+                            <div class="input-group">
+                                <span class="input-group-text">🔗</span>
+                                <input asp-for="AudioUrl" class="form-control" placeholder="/uploads/sarki.mp3" required />
+                            </div>
+                            <small class="text-muted">Projenin 'wwwroot' klasöründeki yolu yaz. Örn: <code>/musics/sarki.mp3</code></small>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="fw-bold text-primary">Resim Linki (ImageUrl)</label>
+                            <div class="input-group">
+                                <span class="input-group-text">🖼️</span>
+                                <input asp-for="ImageUrl" class="form-control" placeholder="/images/kapak.jpg" />
+                            </div>
+                        </div>
+
+                        <input type="hidden" asp-for="FilePath" value="" />
+
+                        <div class="d-grid gap-2 mt-4">
+                            <button type="submit" class="btn btn-primary btn-lg rounded-pill fw-bold">Kaydet</button>
+                            <a href="/" class="btn btn-light rounded-pill">İptal</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
