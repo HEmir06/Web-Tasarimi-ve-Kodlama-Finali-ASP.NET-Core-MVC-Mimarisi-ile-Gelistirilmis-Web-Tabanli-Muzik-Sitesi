@@ -25,23 +25,23 @@
 
 | 1. Ana Sayfa | 2. Ana Sayfa(Dark Mode)| 3. Giriş Ekranı |
 | :---: | :---: | :---: |
-| (<img width="1254" height="860" alt="Ekran görüntüsü 2025-12-17 212635" src="https://github.com/user-attachments/assets/b3495d41-35ec-4bf8-9d05-bd2b23b7aa17" />
-) | (<img width="1421" height="863" alt="Ekran görüntüsü 2025-12-17 212622" src="https://github.com/user-attachments/assets/5ad18eb6-28a6-4902-bbcf-1f72252d97a1" />
-) | (<img width="828" height="460" alt="Ekran görüntüsü 2025-12-17 212654" src="https://github.com/user-attachments/assets/ed9921fe-9f45-4639-9e9f-6f20b93871f6" />
+| <img width="1254" height="860" alt="Ekran görüntüsü 2025-12-17 212635" src="https://github.com/user-attachments/assets/b3495d41-35ec-4bf8-9d05-bd2b23b7aa17" />
+) | <img width="1421" height="863" alt="Ekran görüntüsü 2025-12-17 212622" src="https://github.com/user-attachments/assets/5ad18eb6-28a6-4902-bbcf-1f72252d97a1" />
+) | <img width="828" height="460" alt="Ekran görüntüsü 2025-12-17 212654" src="https://github.com/user-attachments/assets/ed9921fe-9f45-4639-9e9f-6f20b93871f6" />
 ) |
 
 | 4. Kayıt Ekranı  | 5. Şarkı Detayı | 6. Yorumlar |
 | :---: | :---: | :---: |
-| (<img width="567" height="497" alt="Ekran görüntüsü 2025-12-17 212702" src="https://github.com/user-attachments/assets/beadedc5-adf7-4a9a-ad99-014606293b14" />
-) | (<img width="1884" height="908" alt="Ekran görüntüsü 2025-12-17 222748" src="https://github.com/user-attachments/assets/b566706a-f404-47a8-9f98-688a8b515677" />
-) | (<img width="1447" height="682" alt="Ekran görüntüsü 2025-12-17 212828" src="https://github.com/user-attachments/assets/207be321-c21b-4639-8fef-276b19a5ff8b" />
+| <img width="567" height="497" alt="Ekran görüntüsü 2025-12-17 212702" src="https://github.com/user-attachments/assets/beadedc5-adf7-4a9a-ad99-014606293b14" />
+) |<img width="1884" height="908" alt="Ekran görüntüsü 2025-12-17 222748" src="https://github.com/user-attachments/assets/b566706a-f404-47a8-9f98-688a8b515677" />
+) | <img width="1447" height="682" alt="Ekran görüntüsü 2025-12-17 212828" src="https://github.com/user-attachments/assets/207be321-c21b-4639-8fef-276b19a5ff8b" />
 ) |
 
 | 7. Playlist | 8. Playlistler İçi | 9. Playlist İçi (Dark Mode) |
 | :---: | :---: | :---: |
-| (<img width="1298" height="505" alt="Ekran görüntüsü 2025-12-17 212736" src="https://github.com/user-attachments/assets/b38bd98e-83c8-4ff8-a89a-5110bd186cf5" />
-) | (<img width="1365" height="463" alt="Ekran görüntüsü 2025-12-17 212730" src="https://github.com/user-attachments/assets/8e74b06e-d731-49ac-af68-005a3c93f117" />
-) | (<img width="1361" height="676" alt="Ekran görüntüsü 2025-12-17 212759" src="https://github.com/user-attachments/assets/a5c918ff-71b8-48d2-9144-faebb75fe444" />
+| <img width="1298" height="505" alt="Ekran görüntüsü 2025-12-17 212736" src="https://github.com/user-attachments/assets/b38bd98e-83c8-4ff8-a89a-5110bd186cf5" />
+) | <img width="1365" height="463" alt="Ekran görüntüsü 2025-12-17 212730" src="https://github.com/user-attachments/assets/8e74b06e-d731-49ac-af68-005a3c93f117" />
+) | <img width="1361" height="676" alt="Ekran görüntüsü 2025-12-17 212759" src="https://github.com/user-attachments/assets/a5c918ff-71b8-48d2-9144-faebb75fe444" />
 ) |
 
 <br />
