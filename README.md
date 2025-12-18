@@ -140,12 +140,16 @@ Music/
 </div>
 <br>
  
-👨‍💻 Geliştirici
+<div align="center">
 
-<p>
-    Bu proje <strong>Hüseyin Emir Gölemen</strong> tarafından <br />
-    <strong>Kastamonu Üniversitesi - Web Tasarımı ve Kodlama</strong> dersi final projesi kapsamında geliştirilmiştir.
-</p>
+### 👩‍💻 Geliştirici
+
+**Bu proje [Hüseyin Emir Gölemen ](https://github.com/HEmir06) tarafından**
+
+🎓 **Kastamonu Üniversitesi** *Web Tasarımı ve Kodlama Dersi* Final Projesi kapsamında geliştirilmiştir.
+
+---
+</div>
 
 <a href="https://github.com/HEmir06">
     <img src="https://img.shields.io/badge/GitHub-HEmir06-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub">
